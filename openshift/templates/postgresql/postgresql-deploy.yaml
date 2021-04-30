@@ -13,6 +13,7 @@ objects:
       labels:
         name: ${NAME}
         app: ${APP_NAME}
+        backup: ${BACKUP}
         env: ${TAG_NAME}
     spec:
       description: |
@@ -51,9 +52,11 @@ objects:
       generation: 1
       labels:
         app: ${APP_NAME}${SUFFIX}
+        app.kubernetes.io/part-of: ${APP_NAME}${SUFFIX}
         name: ${NAME}${SUFFIX}
         app-group: ${APP_GROUP}
         role: ${ROLE}
+        backup: ${BACKUP}
         env: ${TAG_NAME}
     spec:
       strategy:
@@ -81,9 +84,11 @@ objects:
         metadata:
           labels:
             app: ${APP_NAME}${SUFFIX}
+            app.kubernetes.io/part-of: ${APP_NAME}${SUFFIX}
             name: ${NAME}${SUFFIX}
             app-group: ${APP_GROUP}
             role: ${ROLE}
+            backup: ${BACKUP}
             env: ${TAG_NAME}
         spec:
           volumes:
@@ -162,9 +167,11 @@ objects:
       name: ${NAME}${SUFFIX}
       labels:
         app: ${APP_NAME}${SUFFIX}
+        app.kubernetes.io/part-of: ${APP_NAME}${SUFFIX}
         name: ${NAME}${SUFFIX}
         app-group: ${APP_GROUP}  
         role: ${ROLE}
+        backup: ${BACKUP}
         env: ${TAG_NAME}
     spec:
       storageClassName: ${PERSISTENT_VOLUME_CLASS}
@@ -179,9 +186,11 @@ objects:
       name: ${NAME}${SUFFIX}
       labels:
         app: ${APP_NAME}${SUFFIX}
+        app.kubernetes.io/part-of: ${APP_NAME}${SUFFIX}
         name: ${NAME}${SUFFIX}
         app-group: ${APP_GROUP}
         role: ${ROLE}
+        backup: ${BACKUP}
         env: ${TAG_NAME}
     stringData:
       admin-password: ${POSTGRESQL_ADMIN_PASSWORD}
@@ -194,9 +203,11 @@ objects:
       name: ${NAME}${SUFFIX}
       labels:
         app: ${APP_NAME}${SUFFIX}
+        app.kubernetes.io/part-of: ${APP_NAME}${SUFFIX}
         name: ${NAME}${SUFFIX}
         app-group: ${APP_GROUP}
         role: ${ROLE}
+        backup: ${BACKUP}
         env: ${TAG_NAME}
       annotations:
         template.openshift.io/expose-uri: postgres://{.spec.clusterIP}:{.spec.ports[?(.name=="${NAME}${SUFFIX}")].port}
@@ -237,6 +248,11 @@ parameters:
     description: The role of this service within the application - used for Network Policies
     required: true
     value: db
+  - name: BACKUP
+    displayName: Role
+    description: The role of this service within the application - used for Network Policies
+    required: true
+    value: "true"
   - name: SERVICE_ROLE
     displayName: Service Role
     description: The role of the email verification service within the application - used for Network Policies

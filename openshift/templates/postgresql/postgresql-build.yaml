@@ -9,6 +9,7 @@ objects:
       name: ${NAME}
       labels:
         app: ${APP_NAME}
+        app.kubernetes.io/part-of: ${APP_NAME}
     spec:
       tags:
         - name: ${OUTPUT_IMAGE_TAG}
