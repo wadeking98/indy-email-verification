@@ -235,6 +235,10 @@ objects:
         app-group: ${APP_GROUP}
         role: ${ROLE}
         env: ${TAG_NAME}
+      annotations:
+        description: Defines how to deploy the application server
+        app.openshift.io/connects-to: >-
+          [{"apiVersion":"apps.openshift.io/v1","kind":"DeploymentConfig","name":"${API_HOST}${SUFFIX}"}]
     spec:
       replicas: 1
       selector:
@@ -387,6 +391,11 @@ parameters:
     description: The role of the email verification service within the application - used for Network Policies
     required: true
     value: service
+  - name: API_HOST
+    displayName: API HOST
+    description: The hostname of the api service.
+    required: true
+    value: email-verification-service
   - name: APPLICATION_ADMIN_DOMAIN
     displayName: Application Admin Endpoint Hostname
     description: The exposed admin hostname that will route to the service, if left blank a value will be defaulted.

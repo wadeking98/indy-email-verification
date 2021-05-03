@@ -10,6 +10,7 @@
 # SUFFIX=
 # ROLE=agent
 # SERVICE_ROLE=service
+# API_HOST=email-verification-service
 APPLICATION_ADMIN_DOMAIN=email-verification-agent-admin.vonx.io
 APPLICATION_DOMAIN=email-verification-agent.vonx.io
 # IMAGE_NAMESPACE=a99fd4-tools
